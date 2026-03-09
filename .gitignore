@@ -1,0 +1,46 @@
+# Unreal Engine generated folders
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Plugins/**/Binaries/
+Plugins/**/Intermediate/
+
+# Per-project generated IDE folders
+.vs/
+.idea/
+.vscode/
+
+# Visual Studio generated files
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.VC.VC.opendb
+*.ipch
+
+# Build and debug artifacts
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.lib
+*.log
+*.tmp
+
+# Unreal crash/debug artifacts
+*.dmp
+*.ue4stats
+
+# Keep these in repo (listed for clarity):
+# - *.uproject
+# - Config/
+# - Content/
+# - Source/
+# - Plugins/ (if present)
