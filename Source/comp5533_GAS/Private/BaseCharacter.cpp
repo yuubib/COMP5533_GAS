@@ -2,7 +2,8 @@
 
 
 #include "BaseCharacter.h"
-
+#include "AbilitySystemComponent.h"
+#include "BaseAttributeSet.h"
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
@@ -15,7 +16,11 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	UAbilitySystemComponent* MyAbilitySystemComponent = this->FindComponentByClass<UAbilitySystemComponent>();
+	if (MyAbilitySystemComponent)
+	{
+		MyAbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetHPAttribute()).AddUObject(this, &ABaseCharacter::OnHealthAttributeChanged);
+	}
 }
 
 // Called every frame
@@ -30,5 +35,10 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	HPChangeEvent.Broadcast(Data.NewValue);
 }
 
