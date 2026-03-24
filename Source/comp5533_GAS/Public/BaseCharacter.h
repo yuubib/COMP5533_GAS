@@ -7,31 +7,34 @@
 #include "GameplayEffectTypes.h"
 #include "AbilitySystemComponent.h"
 #include "BaseAttributeSet.h"
+#include "BaseMyGameplayAbility.h"
+// ==============================================
+// !!! 修正：.generated.h 必須是所有 #include 的最後一個，且「必須」放在 UCLASS 宣告之前！
+// ==============================================
 #include "BaseCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeEvent, float, NewValue);
+
 UCLASS()
 class COMP5533_GAS_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ABaseCharacter();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(BlueprintAssignable, Category = "Ability")
 	FOnHealthChangeEvent HPChangeEvent;
 
 	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
+
+	UFUNCTION(BlueprintCallable, Category = "BaseCharacter")
+	FMyGameplayAbilityInfo GetAbilityInfo(TSubclassOf<class UBaseMyGameplayAbility> AbilityClass, int level);
 };
