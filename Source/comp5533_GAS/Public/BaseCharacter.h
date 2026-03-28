@@ -33,8 +33,18 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Ability")
 	FOnHealthChangeEvent HPChangeEvent;
 
+	UPROPERTY(BlueprintAssignable, Category = "Ability")
+	FOnHealthChangeEvent MPChangeEvent;
+
+	UPROPERTY(BlueprintAssignable, Category = "Ability")
+	FOnHealthChangeEvent StrengthChangeEvent;
+
 	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
 
+	void OnMPAttributeChanged(const FOnAttributeChangeData& Data);
+
+	void OnStrengthAttributeChanged(const FOnAttributeChangeData& Data);
+
 	UFUNCTION(BlueprintCallable, Category = "BaseCharacter")
-	FMyGameplayAbilityInfo GetAbilityInfo(TSubclassOf<class UBaseMyGameplayAbility> AbilityClass, int level);
+	FMyGameplayAbilityInfo GameplayAbilityInfo(TSubclassOf<class UBaseMyGameplayAbility> AbilityClass, int level);
 };

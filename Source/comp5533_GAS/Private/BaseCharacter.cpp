@@ -16,6 +16,8 @@ void ABaseCharacter::BeginPlay()
 	if (MyAbilitySystemComponent)
 	{
 		MyAbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetHPAttribute()).AddUObject(this, &ABaseCharacter::OnHealthAttributeChanged);
+		MyAbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetMPAttribute()).AddUObject(this, &ABaseCharacter::OnMPAttributeChanged);
+		MyAbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UBaseAttributeSet::GetStrengthAttribute()).AddUObject(this, &ABaseCharacter::OnStrengthAttributeChanged);
 	}
 }
 
@@ -34,17 +36,25 @@ void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data
 	HPChangeEvent.Broadcast(Data.NewValue);
 }
 
-FMyGameplayAbilityInfo ABaseCharacter::GetAbilityInfo(TSubclassOf<UBaseMyGameplayAbility> AbilityClass, int level)
+void ABaseCharacter::OnMPAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	MPChangeEvent.Broadcast(Data.NewValue);
+}
+
+void ABaseCharacter::OnStrengthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	StrengthChangeEvent.Broadcast(Data.NewValue);
+}
+
+FMyGameplayAbilityInfo ABaseCharacter::GameplayAbilityInfo(TSubclassOf<UBaseMyGameplayAbility> AbilityClass, int level)
 {
 	UAbilitySystemComponent* MyAbilitySystemComponent = this->FindComponentByClass<UAbilitySystemComponent>();
 
-	if (MyAbilitySystemComponent && AbilityClass)
+	UBaseMyGameplayAbility* AbilityIncetance = AbilityClass->GetDefaultObject<UBaseMyGameplayAbility>();
+	
+	if (MyAbilitySystemComponent && AbilityIncetance)
 	{
-		UBaseMyGameplayAbility* AbilityInstance = AbilityClass->GetDefaultObject<UBaseMyGameplayAbility>();
-		if (AbilityInstance)
-		{
-			return AbilityInstance->GetAbilityInfo(level);
-		}
+		return AbilityIncetance->GetAbilityInfo(level);
 	}
 	return FMyGameplayAbilityInfo();
 }
