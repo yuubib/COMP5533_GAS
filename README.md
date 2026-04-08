@@ -2,29 +2,6 @@
 
 基于 Unreal Engine 5.6 的 GAS（Gameplay Ability System）练习项目。
 
-## 当前进展（2026-03-09）
-
-- 已创建 UE5 C++ 项目并启用 `GameplayAbilities` 插件。
-- `Build.cs` 已加入 GAS 相关模块：
-  - `GameplayAbilities`
-  - `GameplayTags`
-  - `GameplayTasks`
-- 输入体系已接入 `EnhancedInput` 模块（代码依赖和输入配置已存在）。
-- 已创建 C++ 基类：
-  - `ABaseCharacter`（当前为基础骨架，尚未接入 ASC/属性/能力逻辑）
-- 已创建基础蓝图角色资源：
-  - `/Game/BP/BP_BaseMyBaseCharacter`
-  - `/Game/BP/Character/BP_Player`
-  - `/Game/BP/Character/BP_Enemy`
-- 已导入一批能力/UI/角色相关资源（用于后续技能与表现接入）：
-  - `/Game/Assets/Abilities/*`（FireBlast、GroundBlast、HealthRegen、Laser）
-  - `/Game/Assets/UI/*`
-  - `/Game/Assets/FX/*`
-  - `/Game/ParagonShinbi/*`
-- 默认地图设置为：
-  - `GameDefaultMap=/Game/GAS`
-  - `EditorStartupMap=/Game/GAS`
-
 ## 环境要求
 
 - Unreal Engine `5.6`
@@ -50,11 +27,3 @@
 - `Content/ParagonShinbi/`
   - 导入的 Paragon Shinbi 相关资源
 
-## 已知注意点
-
-- `DefaultEngine.ini` 中 `GlobalDefaultGameMode` 指向 `/Game/BP/Gameplay/BP_GameMode.BP_GameMode_C`，当前目录下尚未发现对应资源，后续需补齐或改为已有 GameMode。
-- 目前能力系统主体逻辑（ASC、AttributeSet、GA/GE）尚未落地，仍处于项目骨架阶段。
-
-## 下一步
-
-详细开发计划见 `TODO.md`。

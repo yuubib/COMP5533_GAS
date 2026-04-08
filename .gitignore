@@ -44,3 +44,7 @@ Plugins/**/Intermediate/
 # - Content/
 # - Source/
 # - Plugins/ (if present)
+
+Scene_QuarrySlate/
+out/
+out/Windows
